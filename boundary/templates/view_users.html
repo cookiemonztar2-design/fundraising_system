@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>View Users</title>
+    </head>
+    <body>
+        <h1>All User Accounts</h1>
+
+        <table border="1" cellpadding="8">
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                    <a href="/edit-user/{{ user.id }}">
+                        <button>Edit</button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+        <br>
+
+        <a href="/dashboard">
+            <button>Back to Dashboard</button>
+        </a>
+    </body>
+
+</html>

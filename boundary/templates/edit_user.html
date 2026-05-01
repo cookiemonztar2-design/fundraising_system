@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edit Users</title>
+    </head>
+    <body>
+        <h1>Edit User Account</h1>
+
+        <form method="POST">
+            <label>Username:</label>
+            <input type="text" name="username" value="{{ user.username }}">
+
+            <br><br>
+
+            <label>Password:</label>
+            <input type="password" name="password" placeholder="Leave blank to keep current password">
+
+            <br><br>
+
+            <label>Role:</label>
+            <select name="role">
+                <option value="User Admin" {% if user.role == "User Admin" %}selected{% endif %}>User Admin</option>
+                <option value="Fund Raiser" {% if user.role == "Fund Raiser" %}selected{% endif %}>Fund Raiser</option>
+                <option value="Donee" {% if user.role == "Donee" %}selected{% endif %}>Donee</option>
+                <option value="Platform Manager" {% if user.role == "Platform Manager" %}selected{% endif %}>Platform Manager</option>
+            </select>
+
+            <br><br>
+
+            <button type="submit">Save Changes</button>
+        </form>
+
+        <br>
+
+        <a href="/view-users">
+            <button>Back to view users</button>
+        </a>
+    </body>
+</html>
