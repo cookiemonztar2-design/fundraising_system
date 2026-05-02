@@ -2,6 +2,12 @@
 <html>
     <head>
         <title>View Users</title>
+
+        <style>
+            a {
+            text-decoration: none;
+            }
+        </style>
     </head>
     <body>
         <h1>All User Accounts</h1>
@@ -11,6 +17,7 @@
                 <th>ID</th>
                 <th>Username</th>
                 <th>Role</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
 
@@ -19,10 +26,21 @@
                 <td>{{ user.id }}</td>
                 <td>{{ user.username }}</td>
                 <td>{{ user.role }}</td>
+                <td>{{ user.status }}</td>
                 <td>
                     <a href="/edit-user/{{ user.id }}">
-                        <button>Edit</button>
+                        <button style="margin-right: 5px;">Edit</button>
                     </a>
+                    
+                    {% if user.status == "Active" %}
+                    <a href="/suspend-user/{{ user.id }}">
+                        <button>Suspend</button>
+                    </a>
+                    {% else %}
+                    <a href="/unsuspend-user/{{ user.id }}">
+                        <button>Unsuspend</button>
+                    </a>
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}
