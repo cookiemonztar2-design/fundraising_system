@@ -33,15 +33,22 @@ def login():
 def dashboard():
     if "username" not in session:
         return redirect(url_for("auth.login"))
-    
-    return f"""
-    <h1>Welcome {session['username']} ({session['role']})</h1>
 
-    <a href="{url_for("user_admin.create_user")}"><button>Create User</button></a>
-    <a href="{url_for("user_admin.view_users")}"><button>View Users</button></a>
-    <a href="{url_for("fundraiser.create_activity")}")><button>Create Activity</button></a>
-    <a href="{url_for("auth.logout")}"><button>Logout</button></a>
-    """
+    role = session["role"]
+
+    if role == "User Admin":
+        return render_template("user_admin_dashboard.html")
+    
+    elif role == "Fund Raiser":
+        return render_template("fundraiser_dashboard.html")
+
+    else:
+        return render_template(
+            "error.html",
+            title = "Invalid username, password or role",
+            message = "Please ensure particulars entered are correct."
+        )
+
 
 @auth_bp.route("/logout")
 def logout():

@@ -22,7 +22,7 @@ with app.app_context():
     if not UserAccount.query.filter_by(username="admin").first():
         user = UserAccount(username="admin", password="123", role="User Admin", status="Active")
 
-        db.session.add(admin)
+        db.session.add(user)
         db.session.commit()
 
 if __name__=="__main__":

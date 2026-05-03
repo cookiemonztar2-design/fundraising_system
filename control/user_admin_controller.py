@@ -24,13 +24,13 @@ def create_user():
             return f"""
             <h1>Username already exists.</h1>
             
-            <a href="user_admin.create-user">
+            <a href="{url_for('user_admin.create_user')}">
                 <button>Create another user</button>
             </a>
 
             <br><br>
 
-            <a href="auth.dashboard">
+            <a href="{url_for('auth.dashboard')}">
                 <button>Return to Dashboard</button>
             </a>
             """
@@ -38,7 +38,8 @@ def create_user():
         new_user = UserAccount(
             username=username,
             password=password,
-            role=role
+            role=role,
+            status="Active"
         )
 
         db.session.add(new_user)
@@ -47,17 +48,15 @@ def create_user():
         return f"""
         <h1>User {username} created successfully.</h1>
 
-        <a href="user_admin.create-user">
+        <a href="{url_for('user_admin.create_user')}">
             <button>Create another user</button>
         </a>
 
         <br><br>
 
-        <a href="auth.dashboard">
+        <a href="{url_for('auth.dashboard')}">
             <button>Return to Dashboard</button>
         </a>
-
-        
         """
     
     return render_template("create_user.html")
@@ -100,7 +99,11 @@ def edit_user(user_id):
         existing_user = UserAccount.query.filter_by(username=username).first()
 
         if existing_user and existing_user.id != user.id:
-            return "Username already exists."
+            return render_template(
+                "error.html",
+                title = "Username already exists.",
+                message = "Please choose a different username."
+            )
 
         user.username = username
         user.role = role
@@ -113,13 +116,13 @@ def edit_user(user_id):
         return f"""
         <h1>User updated successfully.</h1>
 
-        <a href="user_admin.view-users">
+        <a href="{ url_for('user_admin.view_users') }">
             <button>Back to View Users</button>
         </a>
 
         <br><br>
 
-        <a href="auth.dashboard">
+        <a href="{ url_for('auth.dashboard') }">
             <button>Back to Dashboard</button>
         </a>
         """
