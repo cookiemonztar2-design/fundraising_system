@@ -41,6 +41,10 @@
                         <button>Unsuspend</button>
                     </a>
                     {% endif %}
+
+                    <a href="/delete-user/{{ user.id }}">
+                        <button>Delete User</button>
+                    </a>
                 </td>
             </tr>
             {% endfor %}

@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>View activites</title>
+        <title>View activities</title>
     </head>
 
     <body>
-        <h1>All current activites</h1>
+        <h1>All current activities</h1>
+
+        <form method="GET" action="/view-activities">
+            <input type="text" name="search" placeholder="Search Activities">
+            <button type="submit">Search</button>
+        </form>
 
         <table border="1" cellpadding="8">
             <tr>
@@ -15,7 +20,7 @@
                 <th>Target Amount</th>
                 <th>Category</th>
                 <th>Deadline</th>
-                <th>Status</th>
+                <th>Action</th>
             </tr>
 
             {% for activity in activities %}
@@ -26,7 +31,15 @@
                 <td>{{ activity.target_amount }}</td>
                 <td>{{ activity.category }}</td>
                 <td>{{ activity.deadline }}</td>
-                <td>{{ activity.status }}</td>
+                <td>
+                    <a href="/edit-activity/{{ activity.id }}">
+                        <button>Edit</button>
+                    </a>
+
+                    <a href="/delete-activity/{{ activity.id }}">
+                        <button>Delete</button>
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </table>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edit Activity</title>
+    </head>
+    
+    <body>
+        <h1>Edit activity</h1>
+
+        <form method="POST">
+            <label>Title:</label><br>
+            <input type="text" name="title" value="{{ activity.title }}"><br><br>
+
+            <label>Description</label>
+            <textarea name="description">{{ activity.description }}</textarea><br><br>
+
+            <label>Target Amount:</label>
+            <input type="number" name="target_amount" value="{{ activity.target_amount }}"><br><br>
+
+            <label>Category:</label>
+            <input type="text" name="category" value="{{ activity.category }}"><br><br>
+
+            <label>Deadline:</label>
+            <input type="date" name="deadline" value="{{ activity.deadline}}"><br><br>
+
+            <button type="submit">Update activity</button>
+        </form>
+
+        <br>
+
+        <a href="/view-activities">
+            <button>Back to all activities</button>
+        </a>
+    </body>
+</html>

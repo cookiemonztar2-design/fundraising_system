@@ -166,3 +166,29 @@ def unsuspend_user(user_id):
     db.session.commit()
 
     return redirect(url_for("user_admin.view_users"))
+
+@user_admin_bp.route("/delete-user/<int:user_id>")
+def delete_user(user_id):
+    if "username" not in session:
+        return redirect(url_for("auth.login"))
+    
+    if session["role"] != "User Admin":
+        return render_template(
+            "error.html",
+            title = "Access denied.",
+            message = "Only User Admins are allowed to delete users."
+        )
+    
+    user = UserAccount.query.get_or_404(user_id)
+
+    if user.username.lower() == "admin":
+        return render_template(
+            "error.html",
+            title = "Action prohibited.",
+            message = "The main admin accont cannot be deleted."
+        )
+
+    db.session.delete(user)
+    db.session.commit()
+
+    return redirect(url_for("user_admin.view_users"))
