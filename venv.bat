@@ -1,5 +1,5 @@
-REM setup python venv
 @echo off
+REM setup python venv
 python -m venv fundraising_system\venv
 if errorlevel 1 (
     echo Failed to create virtual environment. Please ensure Python is installed and added to PATH.
